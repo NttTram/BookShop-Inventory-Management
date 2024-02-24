@@ -11,6 +11,17 @@
                 "_UNICODE"
             ],
             "compilerPath": "/usr/bin/gcc"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
         }
     ],
     "version": 4
