@@ -8,18 +8,20 @@ using namespace std;
 class Book;
 class Book{
     int barcode;
-    String title;
-    String author;
+    string title;
+    string author;
     int year;
     
     public:
         double price; 
-        int stock;
-
-        String getTitle();
-        String getAuthor();
+        Book(int barcode, string title, string author, int year, double price);
+        ~Book();
+        int getBarcode();
+        string getTitle();
+        string getAuthor();
         int getYear();
-        double getPrice();
+        
+        void print();
 
 
 
