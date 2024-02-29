@@ -2,22 +2,25 @@
 #define INVENTORY_HPP
 
 #include <iostream>
+#include <map>
 #include "Book.hpp"
 
 using namespace std;
 class Inventory;
 class Inventory{
 
-    map<Book, int> books;
+    map<Book*, int> books;
     double totalCost;
 
     public:
+    Inventory();
+    ~Inventory();
 
-    void addBook(int barcode);
-    void removeBook(int barcode);
-    bool findBook(int barcode);
-    int getStock(int barcode);
-    void updateStock(int barcode);
+    void addBook(Book* book, int stock);
+    void removeBook(Book* book);
+    bool findBook(Book* book);
+    int getStock(Book* book);
+    void updateStock(Book* book, int addStock);
     
     void print();
 

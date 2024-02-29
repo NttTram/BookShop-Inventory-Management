@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Book.hpp"
-
+#include "Inventory.hpp"
 
 void TestBook(){
     //create Book
@@ -16,10 +16,25 @@ void TestBook(){
     harry_potter->print();
     }
 
+void TestInventory(){
+    Inventory* bookshelf = new Inventory();
+    Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
 
+    bookshelf->addBook(harry_potter, 1);
+    if(bookshelf->findBook(harry_potter)){
+        cout<<"Found book in inventory"<<endl;
+    } else{
+        cout<<"Book not found"<<endl;
+    }
+
+    bookshelf->updateStock(harry_potter, 3);
+    bookshelf->print();
+    bookshelf->removeBook(harry_potter);
+    bookshelf->print();
+}
 
 
 int main(){
-    TestBook();
+    TestInventory();
     return 0;
 }
