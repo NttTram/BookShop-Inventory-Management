@@ -6,6 +6,7 @@ Inventory::Inventory(){
 
 void Inventory::addBook(Book* book, int stock){
     books[book] = stock;
+    totalCost += stock * book->price;
 }
 
 void Inventory::removeBook(Book* book){
@@ -36,4 +37,5 @@ void Inventory::print(){
       std::cout<<"Title: "<<value.first->getTitle()<< std::endl;
       std::cout<<"Available Stock: "<<value.second<<std::endl;
      }
+     cout<<"TotalCost: $"<<totalCost<<endl;
 }

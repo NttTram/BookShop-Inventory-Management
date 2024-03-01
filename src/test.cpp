@@ -1,6 +1,9 @@
 #include <iostream>
 #include "Book.hpp"
 #include "Inventory.hpp"
+#include <fstream>
+#include <vector>
+#include <string.h>
 
 void TestBook(){
     //create Book
@@ -34,7 +37,54 @@ void TestInventory(){
 }
 
 
+
+void LoadData(Inventory* shelf){
+    string file_path = "books.txt";
+    ifstream data(file_path);
+
+    
+    if(data){
+        std::string line;
+        while(getline(data, line)){
+
+            std::vector<std::string> splitted;
+            std::string word;
+
+            //Split input line into vector
+            for(char ch : line)
+            {
+                string cmp;
+                cmp += ch;
+                cmp += " ";
+
+                if((cmp.compare(", ") == 0) && (!word.empty()))
+                {
+                    splitted.push_back(word);
+                    word.clear();
+                }
+                else
+                    word += ch;
+            }
+            if(!word.empty())
+                splitted.push_back(word);
+
+            //stock(int)[0] ,barcode(int)[1], title(string)[2], author(string)[3], year(int)[4], price(double)[5]
+            shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stod(splitted[5])), stoi(splitted[0]));
+
+        }
+        data.close();
+    }else{
+        cout<<"Could not open file: "<<file_path<<endl;
+    }
+
+    
+}
+
 int main(){
-    TestInventory();
+    // TestInventory();
+    Inventory* book_shelf = new Inventory();
+
+    LoadData(book_shelf);
+    book_shelf->print();
     return 0;
 }
