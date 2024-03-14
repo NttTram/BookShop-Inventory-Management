@@ -5,6 +5,7 @@
 #include <vector>
 #include <string.h>
 
+
 void TestBook(){
     //create Book
     Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
@@ -57,7 +58,7 @@ void LoadData(Inventory* shelf){
                 cmp += ch;
                 cmp += " ";
 
-                if((cmp.compare(", ") == 0) && (!word.empty()))
+                if((cmp.compare("; ") == 0) && (!word.empty()))
                 {
                     splitted.push_back(word);
                     word.clear();
@@ -80,11 +81,35 @@ void LoadData(Inventory* shelf){
     
 }
 
+void WriteData(string text){
+    //ofstream object
+    std::ofstream fileOut;
+
+    //open txt file and allow appending to txt file instead of writing the whole file
+    fileOut.open("books.txt", std::ios::app);
+
+    if(fileOut.is_open()){
+        //Add txt to file: format stock; barcode; title; author; year; price
+        fileOut << "\n";
+
+        fileOut << text;
+        
+
+        //close file
+        fileOut.close();
+    }else{
+        std::cerr<<"Unable to open file\n";
+    }
+
+
+}
+
 int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
-
-    LoadData(book_shelf);
+    string text = "Testing Writing function";
+    WriteData(text);
+    // LoadData(book_shelf);
     book_shelf->print();
     return 0;
 }
