@@ -104,11 +104,37 @@ void WriteData(string text){
 
 }
 
+// FIX: Don't add to inventory. Write to txt file first then the program Load the data and add into inventory.
+// Something like this but it's not ideal.
+void CreateBook(Inventory* shelf){
+    int barcode;
+    string title;
+    string author;
+    int year;
+    double price;
+
+    cout<<"---Please enter: ---"<<endl;
+    cout<<"barcode: "<<endl;
+    cin>>barcode;
+    cout<<"title: "<<endl;
+    cin>>title;
+    cout<<"author: "<<endl;
+    cin>>author;
+    cout<<"year: "<<endl;
+    cin>>year;
+    cout<<"price: "<<endl;
+    cin>>price;
+
+    shelf->addBook(new Book(barcode, title, author, year, price), 0);
+
+}
+
 int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
-    string text = "Testing Writing function";
-    WriteData(text);
+    // string text = "Testing Writing function";
+    CreateBook(book_shelf);
+    // WriteData(text);
     // LoadData(book_shelf);
     book_shelf->print();
     return 0;
