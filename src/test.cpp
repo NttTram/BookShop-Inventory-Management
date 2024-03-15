@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <string.h>
+#include <limits>
 
 
 void TestBook(){
@@ -115,19 +116,24 @@ void CreateBook(Inventory* shelf){
     string author;
     int year;
     double price;
-
+    
     cout<<"---Please enter: ---"<<endl;
     cout<<"barcode: "<<endl;
     cin>>barcode;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout<<"title: "<<endl;
-    cin>>title;
+    getline(std::cin, title);
+
+    
+
     cout<<"author: "<<endl;
-    cin>>author;
+    getline(std::cin, author);
     cout<<"year: "<<endl;
     cin>>year;
     cout<<"price: "<<endl;
     cin>>price;
-    string res = "0; " + to_string(barcode) + "; " + title + "; " + author + "; " + to_string(year) + "; " + to_string(price);
+    string res = "0;" + to_string(barcode) + ";" + title + ";" + author + ";" + to_string(year) + ";" + to_string(price);
+    cout<<"res: "<<res<<endl;
     WriteData(res);
 
 }
@@ -138,7 +144,7 @@ int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
     // string text = "Testing Writing function";
-    // CreateBook(book_shelf);
+    CreateBook(book_shelf);
     // WriteData(text);
     LoadData(book_shelf);
     book_shelf->print();
