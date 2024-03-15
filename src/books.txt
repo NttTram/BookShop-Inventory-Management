@@ -1,5 +1,3 @@
-0; 62836; Happy Potter; Tram Tran; 1984; 87.98
-1; 35734; Three Little Pigs; N/A, 1888; 1.45
-3; 57393; Red Riding Hood; Smith; 2003; 20.99
-Testing Writing function
-Testing Writing function
+0;62836;Happy Potter;Tram Tran;1984;87.98
+1;35734;Three Little Pigs;N/A;1888;1.45
+3;57393;Red Riding Hood;Smith;2003;20.99

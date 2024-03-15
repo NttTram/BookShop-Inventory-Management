@@ -55,10 +55,11 @@ void LoadData(Inventory* shelf){
             for(char ch : line)
             {
                 string cmp;
+                
+                
                 cmp += ch;
-                cmp += " ";
 
-                if((cmp.compare("; ") == 0) && (!word.empty()))
+                if((cmp.compare(";") == 0) && (!word.empty()))
                 {
                     splitted.push_back(word);
                     word.clear();
@@ -70,7 +71,8 @@ void LoadData(Inventory* shelf){
                 splitted.push_back(word);
 
             //stock(int)[0] ,barcode(int)[1], title(string)[2], author(string)[3], year(int)[4], price(double)[5]
-            shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stod(splitted[5])), stoi(splitted[0]));
+            
+            shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stoi(splitted[5])), stod(splitted[0]));
 
         }
         data.close();
@@ -106,6 +108,7 @@ void WriteData(string text){
 
 // FIX: Don't add to inventory. Write to txt file first then the program Load the data and add into inventory.
 // Something like this but it's not ideal.
+// Add in error checking to make sure the user is entering the correct variable data type
 void CreateBook(Inventory* shelf){
     int barcode;
     string title;
@@ -124,18 +127,20 @@ void CreateBook(Inventory* shelf){
     cin>>year;
     cout<<"price: "<<endl;
     cin>>price;
-
-    shelf->addBook(new Book(barcode, title, author, year, price), 0);
+    string res = "0; " + to_string(barcode) + "; " + title + "; " + author + "; " + to_string(year) + "; " + to_string(price);
+    WriteData(res);
 
 }
+
+
 
 int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
     // string text = "Testing Writing function";
-    CreateBook(book_shelf);
+    // CreateBook(book_shelf);
     // WriteData(text);
-    // LoadData(book_shelf);
+    LoadData(book_shelf);
     book_shelf->print();
     return 0;
 }

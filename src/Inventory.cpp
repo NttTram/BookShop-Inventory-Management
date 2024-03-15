@@ -34,6 +34,7 @@ void Inventory::updateStock(Book* book, int addStock){
 void Inventory::print(){
     std::cout<<"---Inventory---"<<std::endl;
      for (const auto& value : books){
+    std::cout<<endl;
       std::cout<<"Title: "<<value.first->getTitle()<< std::endl;
       std::cout<<"Available Stock: "<<value.second<<std::endl;
      }
