@@ -107,8 +107,8 @@ void WriteData(string text){
 int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
-    string text = "Testing Writing function";
-    WriteData(text);
+    // string text = "Testing Writing function";
+    // WriteData(text);
     // LoadData(book_shelf);
     book_shelf->print();
     return 0;
