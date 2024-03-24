@@ -5,7 +5,8 @@
 #include <vector>
 #include <string.h>
 #include <limits>
-
+#include <sstream>
+#include <iomanip>
 
 void TestBook(){
     //create Book
@@ -73,7 +74,7 @@ void LoadData(Inventory* shelf){
 
             //stock(int)[0] ,barcode(int)[1], title(string)[2], author(string)[3], year(int)[4], price(double)[5]
             
-            shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stoi(splitted[5])), stod(splitted[0]));
+            shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stod(splitted[5])), stoi(splitted[0]));
 
         }
         data.close();
@@ -107,6 +108,16 @@ void WriteData(string text){
 
 }
 
+
+// Convert to 2 decimal points with double values. Use in CreateBook;
+std::string doubleToStringWithPrecision(double value, int precision) {
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(precision) << value;
+    return oss.str();
+}
+
+
+
 // FIX: Don't add to inventory. Write to txt file first then the program Load the data and add into inventory.
 // Something like this but it's not ideal.
 // Add in error checking to make sure the user is entering the correct variable data type
@@ -132,7 +143,9 @@ void CreateBook(Inventory* shelf){
     cin>>year;
     cout<<"price: "<<endl;
     cin>>price;
-    string res = "0;" + to_string(barcode) + ";" + title + ";" + author + ";" + to_string(year) + ";" + to_string(price);
+    price = round(price * 100.0) / 100.0; //round the input from 1.0000 to 1.00
+    string priceSTR = doubleToStringWithPrecision(price, 2);
+    string res = "0;" + to_string(barcode) + ";" + title + ";" + author + ";" + to_string(year) + ";" + priceSTR;
     cout<<"res: "<<res<<endl;
     WriteData(res);
 
