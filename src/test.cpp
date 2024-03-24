@@ -40,7 +40,7 @@ void TestInventory(){
 }
 
 
-
+//NEED CLEANING
 void LoadData(Inventory* shelf){
     string file_path = "books.txt";
     ifstream data(file_path);
@@ -117,10 +117,8 @@ std::string doubleToStringWithPrecision(double value, int precision) {
 }
 
 
-
-// FIX: Don't add to inventory. Write to txt file first then the program Load the data and add into inventory.
-// Something like this but it's not ideal.
-// Add in error checking to make sure the user is entering the correct variable data type
+//NEED CLEANING
+//ADD: error checking to make sure the user is entering the correct variable data type
 void CreateBook(Inventory* shelf){
     int barcode;
     string title;
