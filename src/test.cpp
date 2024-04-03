@@ -8,36 +8,36 @@
 #include <sstream>
 #include <iomanip>
 
-void TestBook(){
-    //create Book
-    Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
+// void TestBook(){
+//     //create Book
+//     Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
 
-    //call methods
-    cout<<harry_potter->getTitle()<<endl;
-    cout<<harry_potter->getAuthor()<<endl;
-    cout<<harry_potter->getYear()<<endl;
-    cout<<harry_potter->price<<endl;
+//     //call methods
+//     cout<<harry_potter->getTitle()<<endl;
+//     cout<<harry_potter->getAuthor()<<endl;
+//     cout<<harry_potter->getYear()<<endl;
+//     cout<<harry_potter->price<<endl;
 
-    //print
-    harry_potter->print();
-    }
+//     //print
+//     harry_potter->print();
+//     }
 
-void TestInventory(){
-    Inventory* bookshelf = new Inventory();
-    Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
+// void TestInventory(){
+//     Inventory* bookshelf = new Inventory();
+//     Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
 
-    bookshelf->addBook(harry_potter, 1);
-    if(bookshelf->findBook(harry_potter)){
-        cout<<"Found book in inventory"<<endl;
-    } else{
-        cout<<"Book not found"<<endl;
-    }
+//     bookshelf->addBook(harry_potter, 1);
+//     // if(bookshelf->findBook(harry_potter)){
+//     //     cout<<"Found book in inventory"<<endl;
+//     // } else{
+//     //     cout<<"Book not found"<<endl;
+//     // }
 
-    bookshelf->updateStock(harry_potter, 3);
-    bookshelf->print();
-    bookshelf->removeBook(harry_potter);
-    bookshelf->print();
-}
+//     bookshelf->updateStock(harry_potter, 3);
+//     bookshelf->print();
+//     bookshelf->removeBook(harry_potter);
+//     bookshelf->print();
+// }
 
 
 //NEED CLEANING
@@ -155,9 +155,14 @@ int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
     // string text = "Testing Writing function";
-    CreateBook(book_shelf);
+    // CreateBook(book_shelf);
+    
     // WriteData(text);
     LoadData(book_shelf);
     book_shelf->print();
+    Book * getBook = book_shelf->getBook(9384);
+    book_shelf->updateStock(7324, 2);
+    book_shelf->getTotalCost();
+    getBook->print();
     return 0;
 }
