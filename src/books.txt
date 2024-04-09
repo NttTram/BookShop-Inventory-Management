@@ -1,14 +1,4 @@
-0;62836;Happy Potter;Tram Tran;1984;87.98
-1;35734;Three Little Pigs;N/A;1888;1.45
-3;57393;Red Riding Hood;Smith;2003;20.99
-0;1234;hello world;di no;19923;348.00
-0;345;Monkey King;N/A;1973;10.48
-0;17923;Legend of the Cat;DI Noooo;2000;192.40
-0;12738;Easter;Jesus;10;100009.30
-0;12348;IT ;IDK;1920;10.20
-0;1234;Froggy;Dibo;1903;50.40
-0;23545;Prince;Little;1995;10.05
-0;9384;Food book;Chef;2017;100.43
-0;12348;GYM RAT;NHI;2023;69.69
-0;7334;Dragon;TNT;2000;69.69
-0;7324;The Returner;Mr Kim;2021;25.99
+0; 62836; Happy Potter; Tram Tran; 1984; 87.98
+1; 35734; Three Little Pigs; N/A, 1888; 1.45
+3; 57393; Red Riding Hood; Smith; 2003; 20.99
+Testing Writing function

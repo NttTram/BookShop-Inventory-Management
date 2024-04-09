@@ -172,11 +172,9 @@ void DisplayText(){
 
 int main(){
     // TestInventory();
-    // Inventory* book_shelf = new Inventory();
-    // // string text = "Testing Writing function";
-    // // CreateBook(book_shelf);
-    
-    // // WriteData(text);
+    Inventory* book_shelf = new Inventory();
+    // string text = "Testing Writing function";
+    // WriteData(text);
     // LoadData(book_shelf);
     // book_shelf->print();
     // Book * getBook = book_shelf->getBook(9384);
