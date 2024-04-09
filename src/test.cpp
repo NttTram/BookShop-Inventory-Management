@@ -7,6 +7,7 @@
 #include <limits>
 #include <sstream>
 #include <iomanip>
+#include <math.h>
 
 // void TestBook(){
 //     //create Book
@@ -149,20 +150,39 @@ void CreateBook(Inventory* shelf){
 
 }
 
+void DisplayText(){
+    //Barcode, title, author, price
+    cout<<"Books:"<<endl;
+    cout<<"-----------------------------------------------------------------------"<<endl;
+    cout<<setw(10)<< left<< "Barcode"<<setw(30)<<left<<"|Title"<<setw(20)<<left<<"|Author"<<setw(10)<<left<<"|Price"<<endl;
+    cout<<"-----------------------------------------------------------------------"<<endl;
 
+    string title = "Toy Story";
+    string author = "IDK";
+    int barcode = 1234;
+    double price = 10.49;
+
+    cout<<setw(10)<< left<< barcode << "|"<<setw(29)<<left<<title<<"|"<<setw(19)<<left<<author <<"|"<<setw(9)<<left<<price<<endl;
+    cout<<"----------+-----------------------------+-------------------+----------"<<endl;
+    cout<<setw(10)<< left<< barcode << "|"<<setw(29)<<left<<title<<"|"<<setw(19)<<left<<author <<"|"<<setw(9)<<left<<price<<endl;
+
+
+
+}
 
 int main(){
     // TestInventory();
-    Inventory* book_shelf = new Inventory();
-    // string text = "Testing Writing function";
-    // CreateBook(book_shelf);
+    // Inventory* book_shelf = new Inventory();
+    // // string text = "Testing Writing function";
+    // // CreateBook(book_shelf);
     
-    // WriteData(text);
-    LoadData(book_shelf);
-    book_shelf->print();
-    Book * getBook = book_shelf->getBook(9384);
-    book_shelf->updateStock(7324, 2);
-    book_shelf->getTotalCost();
-    getBook->print();
+    // // WriteData(text);
+    // LoadData(book_shelf);
+    // book_shelf->print();
+    // Book * getBook = book_shelf->getBook(9384);
+    // book_shelf->updateStock(7324, 2);
+    // book_shelf->getTotalCost();
+    // getBook->print();
+    DisplayText();
     return 0;
 }
