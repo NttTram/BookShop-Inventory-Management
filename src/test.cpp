@@ -4,41 +4,44 @@
 #include <fstream>
 #include <vector>
 #include <string.h>
+#include <limits>
+#include <sstream>
+#include <iomanip>
+#include <math.h>
+
+// void TestBook(){
+//     //create Book
+//     Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
+
+//     //call methods
+//     cout<<harry_potter->getTitle()<<endl;
+//     cout<<harry_potter->getAuthor()<<endl;
+//     cout<<harry_potter->getYear()<<endl;
+//     cout<<harry_potter->price<<endl;
+
+//     //print
+//     harry_potter->print();
+//     }
+
+// void TestInventory(){
+//     Inventory* bookshelf = new Inventory();
+//     Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
+
+//     bookshelf->addBook(harry_potter, 1);
+//     // if(bookshelf->findBook(harry_potter)){
+//     //     cout<<"Found book in inventory"<<endl;
+//     // } else{
+//     //     cout<<"Book not found"<<endl;
+//     // }
+
+//     bookshelf->updateStock(harry_potter, 3);
+//     bookshelf->print();
+//     bookshelf->removeBook(harry_potter);
+//     bookshelf->print();
+// }
 
 
-void TestBook(){
-    //create Book
-    Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
-
-    //call methods
-    cout<<harry_potter->getTitle()<<endl;
-    cout<<harry_potter->getAuthor()<<endl;
-    cout<<harry_potter->getYear()<<endl;
-    cout<<harry_potter->price<<endl;
-
-    //print
-    harry_potter->print();
-    }
-
-void TestInventory(){
-    Inventory* bookshelf = new Inventory();
-    Book *harry_potter = new Book(35474, "Harry Potter and The Three Pigs", "Tram Tran", 2002, 46.69);
-
-    bookshelf->addBook(harry_potter, 1);
-    if(bookshelf->findBook(harry_potter)){
-        cout<<"Found book in inventory"<<endl;
-    } else{
-        cout<<"Book not found"<<endl;
-    }
-
-    bookshelf->updateStock(harry_potter, 3);
-    bookshelf->print();
-    bookshelf->removeBook(harry_potter);
-    bookshelf->print();
-}
-
-
-
+//NEED CLEANING
 void LoadData(Inventory* shelf){
     string file_path = "books.txt";
     ifstream data(file_path);
@@ -55,10 +58,11 @@ void LoadData(Inventory* shelf){
             for(char ch : line)
             {
                 string cmp;
+                
+                
                 cmp += ch;
-                cmp += " ";
 
-                if((cmp.compare("; ") == 0) && (!word.empty()))
+                if((cmp.compare(";") == 0) && (!word.empty()))
                 {
                     splitted.push_back(word);
                     word.clear();
@@ -70,6 +74,7 @@ void LoadData(Inventory* shelf){
                 splitted.push_back(word);
 
             //stock(int)[0] ,barcode(int)[1], title(string)[2], author(string)[3], year(int)[4], price(double)[5]
+            
             shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stod(splitted[5])), stoi(splitted[0]));
 
         }
@@ -104,12 +109,78 @@ void WriteData(string text){
 
 }
 
+
+// Convert to 2 decimal points with double values. Use in CreateBook;
+std::string doubleToStringWithPrecision(double value, int precision) {
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(precision) << value;
+    return oss.str();
+}
+
+
+//NEED CLEANING
+//ADD: error checking to make sure the user is entering the correct variable data type
+void CreateBook(Inventory* shelf){
+    int barcode;
+    string title;
+    string author;
+    int year;
+    double price;
+    
+    cout<<"---Please enter: ---"<<endl;
+    cout<<"barcode: "<<endl;
+    cin>>barcode;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout<<"title: "<<endl;
+    getline(std::cin, title);
+
+    
+
+    cout<<"author: "<<endl;
+    getline(std::cin, author);
+    cout<<"year: "<<endl;
+    cin>>year;
+    cout<<"price: "<<endl;
+    cin>>price;
+    price = round(price * 100.0) / 100.0; //round the input from 1.0000 to 1.00
+    string priceSTR = doubleToStringWithPrecision(price, 2);
+    string res = "0;" + to_string(barcode) + ";" + title + ";" + author + ";" + to_string(year) + ";" + priceSTR;
+    cout<<"res: "<<res<<endl;
+    WriteData(res);
+
+}
+
+void DisplayText(){
+    //Barcode, title, author, price
+    cout<<"Books:"<<endl;
+    cout<<"-----------------------------------------------------------------------"<<endl;
+    cout<<setw(10)<< left<< "Barcode"<<setw(30)<<left<<"|Title"<<setw(20)<<left<<"|Author"<<setw(10)<<left<<"|Price"<<endl;
+    cout<<"-----------------------------------------------------------------------"<<endl;
+
+    string title = "Toy Story";
+    string author = "IDK";
+    int barcode = 1234;
+    double price = 10.49;
+
+    cout<<setw(10)<< left<< barcode << "|"<<setw(29)<<left<<title<<"|"<<setw(19)<<left<<author <<"|"<<setw(9)<<left<<price<<endl;
+    cout<<"----------+-----------------------------+-------------------+----------"<<endl;
+    cout<<setw(10)<< left<< barcode << "|"<<setw(29)<<left<<title<<"|"<<setw(19)<<left<<author <<"|"<<setw(9)<<left<<price<<endl;
+
+
+
+}
+
 int main(){
     // TestInventory();
     Inventory* book_shelf = new Inventory();
     // string text = "Testing Writing function";
     // WriteData(text);
     // LoadData(book_shelf);
-    book_shelf->print();
+    // book_shelf->print();
+    // Book * getBook = book_shelf->getBook(9384);
+    // book_shelf->updateStock(7324, 2);
+    // book_shelf->getTotalCost();
+    // getBook->print();
+    DisplayText();
     return 0;
 }

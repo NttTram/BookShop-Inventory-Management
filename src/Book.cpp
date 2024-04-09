@@ -7,7 +7,9 @@ Book::Book(int barcode, string title, string author, int year, double price){
     this->year = year;
     this->price = price;
 }
-
+Book::~Book(){
+    
+}
 int Book::getBarcode(){
     return barcode;
 }
