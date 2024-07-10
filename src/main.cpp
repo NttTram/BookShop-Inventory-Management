@@ -6,8 +6,29 @@
 
 int main(){
     std::vector<MenuItem> data;
-    
-    std::string title = "Baby Shark Likes to Swim"; 
-    MainMenu();
+    bool exit = false;
+    int userInput;
+
+
+
+
+
+
+    ''
+    while(!exit){
+        userInput = mainMenu(); 
+        if(userInput == 6){ // OPTION:: EXIT
+            exitMenu();
+            exit = true;
+        }
+        else if(userInput == 5){ //OPTION:: ABOUT US
+            aboutMenu();
+        }
+        else if(userInput == 4){ //OPTION:: CONTACT US
+            contactMenu();
+        }
+
+    }
+
     return 0;
 }
