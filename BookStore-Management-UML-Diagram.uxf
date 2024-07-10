@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>350</y>
+      <w>240</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>*BookStore*
+--
++ storeName : string
++ owner : Owner
++ employees : vector&lt;Employee&gt;
++ inventories : Inventory
+--
++ BookStore()
++ buyBook()
++ sellBook()
+- addInventory()
+- removeInventory()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>360</y>
+      <w>210</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>*Book*
+--
++ ID : _int
++ title : string
++ author : string
++ description : string
++ year : int
+- price : double
+--
++ Book()
++ getName() : string
++ getAuthor() : string
++ getDescription : string
++ setPrice()
++ getPrice() : double
++ printInto()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>360</y>
+      <w>200</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>*Inventory*
+--
++ name : string
++ books : map(int, (Book, int))
++ totalCost : double
+--
++ Inventory()
++ addBook()
++ removeBook()
++ getBook() : Book
++ getStock() : int
++ printAll()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>620</y>
+      <w>350</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>*Owner*
+--
++ storeOwned : vector&lt;location : string, name : string&gt; //location, name
+- budget : double
+- profit : double
+--
++ Owner()
++ setBudget()
++ checkBudget()
++ currProfit()
++ updateProfit()
++ printDetail()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>620</y>
+      <w>220</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>/Person/
+--
+
++ ID : _int
++ firstName : string
++ lastName : string
++ age : int
++ gender : char
+--
++ printDetail()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>400</y>
+      <w>230</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>680</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>840</y>
+      <w>140</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>*Employee*
+--
++ ID
++ position: string
+--
++ Employee()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>760</y>
+      <w>200</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;130.0;10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>410</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>530</y>
+      <w>430</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;410.0;50.0;410.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>530</y>
+      <w>390</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;400.0;370.0;400.0</additional_attributes>
+  </element>
+</diagram>
