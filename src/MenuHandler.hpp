@@ -42,9 +42,10 @@ struct MenuItem {
 
 // IMPLEMENTATION:: Space out text to the middle of screen
 int centerPad(const std::string& title){
+    
     int padding = SCREEN_SIZE / 2;
     int titlePadding = (title.size() / 2) ;
-    int centeringPadding = padding + titlePadding;
+    int centeringPadding =  padding - titlePadding;
 
 
     return centeringPadding;
@@ -53,11 +54,11 @@ int centerPad(const std::string& title){
 // IMPLEMENTATION:: Display menu Title
 void displayTitle(const std::string& title){
     int centerPadding = centerPad(title);
-
+    std::cout << "Paddinng: " << centerPadding << std::endl;
     // Display Menu Title
         std::cout << std::setfill('=') << std::setw(SCREEN_SIZE) << "" << std::endl;
         // std::cout << std::endl;
-        std::cout << std::setfill(' ') << std::setw(centerPadding) << title << "" << std::endl;
+        std::cout << std::setfill(' ') << std::setw(centerPadding) << "" << title << std::endl;
         // std::cout << std::endl;
         std::cout << std::setfill('=') << std::setw(SCREEN_SIZE) << "" << std::endl;
 }

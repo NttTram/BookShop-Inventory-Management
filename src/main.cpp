@@ -59,8 +59,10 @@ void LoadData(Inventory* shelf){
 void displayBooks( std::map<Book*, int> books){
     //Barcode, title, author, price
     clearConsole();
+    // Resetting alignment to default
+    std::cout << std::resetiosflags(std::ios::left);
     displayTitle("Books");
-  
+    
     std::cout<< setfill(' ') << 
                 setw(10) << left<< "|Barcode" << 
                 setw(50) << left << "|Title" << 
