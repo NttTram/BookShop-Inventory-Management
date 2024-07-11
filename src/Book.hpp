@@ -8,17 +8,18 @@ using namespace std;
 class Book;
 class Book{
     int barcode;
-    string title;
-    string author;
+    std::string title;
+    std::string author;
     int year;
     
     public:
         double price; 
-        Book(int barcode, string title, string author, int year, double price);
+        Book();
+        Book(int barcode, std::string title, std::string author, int year, double price);
         ~Book();
         int getBarcode();
-        string getTitle();
-        string getAuthor();
+        std::string getTitle();
+        std::string getAuthor();
         int getYear();
         
         void print();

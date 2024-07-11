@@ -11,10 +11,15 @@ const int SCREEN_SIZE = 100;
 // IMPLEMENTATION:: Keeps Menu text clean
 void clearConsole(){
     #ifdef _WIN32
-        std:system("cls");
+        if (system("cls") != 0) {
+            std::cerr << "Failed to clear the console using 'cls'" << std::endl;
+        }
+    #elif defined(__linux__) || defined(__APPLE__)
+        if (system("clear") != 0) {
+            std::cerr << "Failed to clear the console using 'clear'" << std::endl;
+        }
     #else
-        //Assume Unix-like system
-        std::system("clear");
+        std::cerr << "Unsupported OS" << std::endl;
     #endif
 }
 
@@ -60,7 +65,8 @@ void displayTitle(const std::string& title){
 
 // IMPLEMENTATION:: Display data/menu items
 void displayMenuItem(std::vector<MenuItem>& data){
-    for(int i = 0; i < data.size(); i++){
+    int dataSize = data.size();
+    for(int i = 0; i < dataSize; i++){
         std::cout << i + 1 << ". " << data[i].title << std::endl;
     }
 
@@ -104,6 +110,7 @@ int displayMenu(const std::string& title, std::vector<MenuItem>& data){
     bool valid = false;
 
     while(!valid){
+        clearConsole();
         displayTitle(title);
         displayMenuItem(data);
         userPrompt(valid, userInput, dataSize);
@@ -128,7 +135,7 @@ int displayMenu(const std::string& title, std::vector<MenuItem>& data){
 
 
 int mainMenu(void){
-    clearConsole();
+
     std::vector<MenuItem> menuList = {
         {1, "View All Books"},
         {2, "Search For A Book"},
@@ -137,6 +144,7 @@ int mainMenu(void){
         {5, "About Us"},
         {6, "Exit"}
     };
+
   
     return displayMenu("Main Menu", menuList);
 }

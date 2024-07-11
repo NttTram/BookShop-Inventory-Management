@@ -8,8 +8,8 @@ clean:
 reload: clean all
 
 
-mazeRunner: Book.o Main.o 
-	g++ -Wall -Werror -std=c++17 -g -O -o $@ $^ -lmcpp 
+main: Book.o  Inventory.o main.o
+	g++ -Wall -Werror -std=c++17 -g -O -o $@ $^ 
 
 %.o: %.cpp 
 	g++ -Wall -Werror -std=c++17 -g -O -c $^
