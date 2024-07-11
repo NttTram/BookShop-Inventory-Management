@@ -1,9 +1,9 @@
 0; 62836;Happy Potter;Tram Tran;1984;87.98
-1; 35734;Three Little Pigs;N/A,1888;1.45
+1; 35734;Three Little Pigs;N/A;1888;9.04
 3; 57393;Red Riding Hood;Smith;2003;20.99
 23; 34242;Baby Shark Book;Korean;2012;10.99
 5; 45782;Mulan Fighting the Hans;Disney;2001;14.89
 8; 66778;Cooks Book;CJ Chef;2021;27.99
 5; 78234;Bible;Jesus;0;1.99
-5; 34784;Healthy Lifestyle;Health Guru; 2020;23.50
-2; 42734;Nhi's poopoo;Nhi Noob; 2024;0.99;
+5; 34784;Healthy Lifestyle;Health Guru;2020;23.50
+2; 42734;Nhi's poopoo;Nhi Noob;2024;0.99;

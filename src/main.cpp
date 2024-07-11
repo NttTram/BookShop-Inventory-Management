@@ -24,7 +24,7 @@ void LoadData(Inventory* shelf){
             std::vector<std::string> splitted;
             std::string word;
 
-            //Split input line into vector
+            //Split input line into vector 
             for(char ch : line)
             {
                 std::string cmp;
@@ -32,21 +32,27 @@ void LoadData(Inventory* shelf){
                 
                 cmp += ch;
 
-                if((cmp.compare(";") == 0) && (!word.empty()))
-                {
+                if((cmp.compare(";") == 0) && (!word.empty())){
                     splitted.push_back(word);
                     word.clear();
                 }
-                else
+                else{
                     word += ch;
+                }
             }
             if(!word.empty())
                 splitted.push_back(word);
 
-            //stock(int)[0] ,barcode(int)[1], title(string)[2], author(string)[3], year(int)[4], price(double)[5]
             
-            shelf->addBook(new Book(stoi(splitted[1]), splitted[2], splitted[3], stoi(splitted[4]), stod(splitted[5])), stoi(splitted[0]));
+            int stock = std::stoi(splitted[0]);
+            int barcode = std::stoi(splitted[1]);
+            std::string title = splitted[2];
+            std::string author = splitted[3];
+            int year = std::stoi(splitted[4]);
+            double price = std::stod(splitted[5]);
 
+            shelf->addBook(new Book(barcode, title, author, year, price), stock);
+ 
         }
         data.close();
     }else{
@@ -106,11 +112,11 @@ int main(){
     bool exit = false;
     int userInput;
 
-    Inventory* bookShelf= new Inventory();
+    Inventory* bookShelf = new Inventory();
     //TODO:: INVENTORY
 
     LoadData(bookShelf);
-    std::map<Book*, int> books = bookShelf->getAllBooks();
+    // std::map<Book*, int> books = bookShelf->getAllBooks();
     
     
 
@@ -135,7 +141,7 @@ int main(){
 
         }
         else if(userInput == 1){ //OPTION:: VIEW ALL BOOKS
-            displayBooks(books);
+            // displayBooks(books);
             std::cout << "Enter any key to return" << std::endl;
             std::cin.get();
             clearCin();
