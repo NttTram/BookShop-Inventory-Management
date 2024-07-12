@@ -156,6 +156,30 @@ int mainMenu(void){
     -->     Enter quantity to buy:
 */
 
+void buyMenu(void){
+      // search book
+            // Add to cart
+            // show total cost
+            // type buy to confirm 
+            /*
+                1. Add Book
+                2. Checkout
+                3. Return
+
+
+            */
+
+
+
+    std::vector<MenuItem> menuList = {
+        {1, "Add Book to Cart"},
+        {2, "Checkout"},
+        {3, "Return"}
+    };
+    displayMenu("Buy Books", menuList);
+        
+}
+
 void buyMain(void){
     
 }

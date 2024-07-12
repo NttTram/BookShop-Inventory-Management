@@ -133,6 +133,7 @@ int main(){
             contactMenu();
         }
         else if(userInput == 3){ //OPTION:: BUY BOOK
+            buyMenu();
 
         }
         else if(userInput == 2){ //OPTION:: SEARCH BOOK
