@@ -103,6 +103,57 @@ void displayBooks( std::map<Book*, int> books){
 
 }
 
+void displayCart(std::map<Book*, int> cart){
+     //Barcode, title, author, price
+    // clearConsole();
+    double totalCost = 0;
+    // Resetting alignment to default
+    std::cout << std::resetiosflags(std::ios::left);
+    displayTitle("Shopping Cart");
+    
+    std::cout<< setfill(' ') << 
+                setw(10) << left<< "|Barcode" << 
+                setw(50) << left << "|Title" << 
+                setw(30) << left << "|Author" << 
+                setw(9) << left << "|Price" << "|" << std::endl;
+    std::cout<< setfill('-') << 
+                    setw(10) << left << "+" <<
+                    setw(50) << left << "+" <<
+                    setw(30) << left << "+" <<
+                    setw(10) << left << "+" << std::endl;
+   
+    for (const auto& value : cart){
+        int barcode = value.first->getBarcode();
+        std::string title = value.first->getTitle();
+        std::string author = value.first->getAuthor();
+        double price = value.first->price;
+
+        std::cout << std::setfill(' ')
+                << "|#" << std::setw(8) << std::left << barcode 
+                << "|" << std::setw(49) << std::left << title 
+                << "|" << std::setw(29) << std::left << author 
+                << "|$" << std::setw(7) << std::left << price 
+                << "|" << std::endl;
+        std::cout << setfill('-') << 
+                    setw(10) << left << "+" <<
+                    setw(50) << left << "+" <<
+                    setw(30) << left << "+" <<
+                    setw(10) << left << "+" << std::endl;
+        
+        totalCost += value.first->price; //THIS ONLY ADD ONE BOOK. NO OPTION FOR BUY BOOK QUANTITY
+    }
+    std::cout << setfill(' ') << "|" << setw(91) <<right << "|Total Cost:$" <<setw(7) << left << totalCost << "" << "|" << std::endl;
+
+    std::cout<< setfill('-') << "+" <<
+                setw(79) << right << "+" <<
+                setw(20) << right << "+" << std::endl;
+
+    // Resetting alignment to default
+    std::cout << std::resetiosflags(std::ios::left);
+    std::cout << setfill(' ')<< ""; 
+
+}
+
 
 
 void searchBook(Inventory* bookShelf){
@@ -186,7 +237,110 @@ int main(){
             contactMenu();
         }
         else if(userInput == 3){ //OPTION:: BUY BOOK
-            buyMenu();
+
+            std::map<Book*, int> cart;
+            bool valid = false;
+
+            while(!valid){
+                
+                int input = buyMenu();
+
+                try{
+                    if(input == 1){ //OPTION:: ADD BOOK TO CART
+                        bool done = false;
+                        while(!done){
+                            try{
+                                clearConsole();
+                                displayCart(cart);  
+                                int barcode;
+                                std::cout << "0. Done\n\n\n";
+                                std::cout << "Enter book barcode: ";
+                                std::cin >> barcode;
+
+                                if(std::cin.fail()) throw std::invalid_argument("Invalid input: not an integer.");
+                                
+                                if(barcode != 0){
+                                    
+                                    bool foundBook = bookShelf->findBook(barcode);
+
+                                    if(foundBook){
+                                        int stock = bookShelf->getStock(barcode);
+
+                                        if(stock <= 0){
+                                            throw("Out of stock!");
+                                        }else{
+                                            Book* book = bookShelf->getBook(barcode);
+                                            displayTitle("Found Book: " + book->getTitle());
+                                            book->print();
+                                            cart[book] = stock;
+                                            
+                                        }
+
+                                    }else{
+                                        throw("Book not found!");
+                                    }
+                                    
+                                    std::cout << "Enter any key to continue" << std::endl;
+                                    std::cin.get();
+                                    clearCin();
+                                } else if(barcode == 0){
+                                    done = true;
+                                }
+
+                            }
+                            catch(const std::invalid_argument& e)
+                            {
+                                clearCin();
+                                std::cerr << "Error:: " << e.what() << '\n';
+                                std::cout << "Enter any key to continue" << std::endl;
+                                clearCin();
+                            }
+                            catch(const char* e){
+                                clearCin();
+                                std::cerr << "Error:: " << e << '\n';
+                                std::cout << "Enter any key to continue" << std::endl;
+                                clearCin();
+                            }
+
+                        }
+                        
+
+
+                    }
+                    else if(input == 2){ //OPTION:: CHECK CART
+                        displayCart(cart); 
+                        std::cout << "Enter any key to return" << std::endl;
+                        std::cin.get();
+                        clearCin();
+                    }
+                    else if(input == 3){ //OPTION:: CHECKOUT
+
+                    }
+                    else if(input == 4){ //OPTION:: RETURN
+                        valid = true;
+                    }
+                    else{
+                        throw("Invalid option");
+                    }
+
+                    
+                    
+                }
+                catch(const std::invalid_argument& e)
+                {
+                    clearCin();
+                    std::cerr << "Error:: " << e.what() << '\n';
+                    std::cout << "Enter any key to continue" << std::endl;
+                    clearCin();
+                }
+                catch(const char* e){
+                    clearCin();
+                    std::cerr << "Error:: " << e << '\n';
+                    std::cout << "Enter any key to continue" << std::endl;
+                    clearCin();
+                }
+            }
+            // displayBooks(cart);
 
         }
         else if(userInput == 2){ //OPTION:: SEARCH BOOK
