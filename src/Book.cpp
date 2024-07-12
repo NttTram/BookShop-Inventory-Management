@@ -30,10 +30,10 @@ int Book::getYear(){
 }
 
 void Book::print(){
-    std::cout<<"--------------------"<<std::endl;
-    std::cout<<"Barcode: "<<barcode<<std::endl;
-    std::cout<<"Title: "<<title<<std::endl;
-    std::cout<<"Author: "<<author<<std::endl;
-    std::cout<<"Year: "<<year<<std::endl;
-    std::cout<<"Price: $"<<price<<std::endl;
+
+    std::cout << "Barcode: #" << barcode << std::endl;
+    std::cout << "Title: " << title << std::endl;
+    std::cout << "Author: " << author << std::endl;
+    std::cout << "Year: " << year << std::endl;
+    std::cout << "Price: $" << price << std::endl;
 }

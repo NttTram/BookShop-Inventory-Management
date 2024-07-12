@@ -25,11 +25,11 @@ Book* Inventory::getBook(int barcode){
 
     for (auto& book : books){
         if(book.first->getBarcode() == barcode){
-            std::cout<<"--- Found book with barcode: "<<barcode<<" ---"<<std::endl;
+            // std::cout<<"--- Found book with barcode: "<<barcode<<" ---"<<std::endl;
             return book.first;
         }
     }
-    std::cout<<"--- Book not found ---"<<std::endl;
+    // std::cout<<"--- Book not found ---"<<std::endl;
     return emptyBook;
 }
 
