@@ -105,7 +105,60 @@ void displayBooks( std::map<Book*, int> books){
 
 
 
+void searchBook(Inventory* bookShelf){
+    int barcode = 0;
+    bool valid = false;
+    while(!valid){
+        try
+        {
+            clearConsole();
+            displayTitle("Search For A Book");
+            
+            std::cout << "0. Return" << std::endl;
+            std::cout << "\n\n\n\nEnter book barcode: ";
+            std::cin >> barcode;
+            if(std::cin.fail()){
+                
+                throw std::invalid_argument("Invalid input: not an integer.");
+            }
+            if(barcode != 0){
+                
+                bool foundBook = bookShelf->findBook(barcode);
 
+                if(foundBook){
+                    Book* book = bookShelf->getBook(barcode);
+                    displayTitle("Found Book: " + book->getTitle());
+                    book->print();
+                    book->~Book();
+
+                }else{
+                    throw("Book not found!");
+                }
+                
+                std::cout << "Enter any key to return" << std::endl;
+                std::cin.get();
+                clearCin();
+            }
+            
+            valid = true;
+        }
+        catch(const std::invalid_argument& e)
+        {
+            clearCin();
+            std::cerr << "Error:: " << e.what() << '\n';
+            std::cout << "Enter any key to continue" << std::endl;
+            clearCin();
+        }
+        catch(const char* e){
+            clearCin();
+            std::cerr << "Error:: " << e << '\n';
+            std::cout << "Enter any key to continue" << std::endl;
+            clearCin();
+        }
+    }
+        
+
+}
 
 int main(){
     std::vector<MenuItem> data;
@@ -137,60 +190,7 @@ int main(){
 
         }
         else if(userInput == 2){ //OPTION:: SEARCH BOOK
-            int barcode = 0;
-            bool valid = false;
-            while(!valid){
-
-                try
-                {
-                    clearConsole();
-                    displayTitle("Search For A Book");
-                    
-                    std::cout << "0. Return" << std::endl;
-                    std::cout << "\n\n\n\nEnter book barcode: ";
-                    std::cin >> barcode;
-                    if(std::cin.fail()){
-                       
-                        throw std::invalid_argument("Invalid input: not an integer.");
-                    }
-                    if(barcode != 0){
-                        
-                        bool foundBook = bookShelf->findBook(barcode);
-
-                        if(foundBook){
-                            Book* book = bookShelf->getBook(barcode);
-                            displayTitle("Found Book: " + book->getTitle());
-                            book->print();
-                            book->~Book();
-
-                        }else{
-                            throw("Book not found!");
-                        }
-                        
-                        std::cout << "Enter any key to return" << std::endl;
-                        std::cin.get();
-                        clearCin();
-                    }
-                        
-                    
-                    valid = true;
-                }
-                catch(const std::invalid_argument& e)
-                {
-                    clearCin();
-                    std::cerr << "Error:: " << e.what() << '\n';
-                    std::cout << "Enter any key to continue" << std::endl;
-                    clearCin();
-                }
-                catch(const char* e){
-                    clearCin();
-                    std::cerr << "Error:: " << e << '\n';
-                    std::cout << "Enter any key to continue" << std::endl;
-                    clearCin();
-                }
-            }
-            
-
+            searchBook(bookShelf);
 
         }
         else if(userInput == 1){ //OPTION:: VIEW ALL BOOKS
