@@ -27,7 +27,7 @@ class Inventory{
     void getTotalCost();
     
     void print();
-
+    void clearInventory();
 
 
 };

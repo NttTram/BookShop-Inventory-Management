@@ -73,4 +73,10 @@ void Inventory::print(){
     std::cout<<"TotalCost: $"<<totalCost<<std::endl;
 }
 
+void Inventory::clearInventory(){
+    // for (const auto& book : books){
+    //     book.first->~Book(); 
+    // }
+    books.clear();
+}
 

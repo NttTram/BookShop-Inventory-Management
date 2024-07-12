@@ -116,11 +116,9 @@ int main(){
     //TODO:: INVENTORY
 
     LoadData(bookShelf);
-    std::map<Book*, int> books = bookShelf->getAllBooks();
-    
-    
 
-    
+    std::map<Book*, int> books = bookShelf->getAllBooks();
+
     while(!exit){
         userInput = mainMenu(); 
 
