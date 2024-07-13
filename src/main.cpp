@@ -196,7 +196,7 @@ void searchBook(Inventory* bookShelf){
 }
 
 
-void addBookToCart(std::map<Book*, int> cart, Inventory* bookShelf){
+void addBookToCart(std::map<Book*, int>& cart, Inventory* bookShelf){
     bool done = false;
     while(!done){
         try{
@@ -263,6 +263,7 @@ int main(){
     //TODO:: INVENTORY
     LoadData(bookShelf);
 
+    std::map<Book*, int> cart;
     std::map<Book*, int> books = bookShelf->getAllBooks();
 
     while(!exit){
@@ -280,7 +281,6 @@ int main(){
         }
         else if(userInput == 3){ //OPTION:: BUY BOOK
 
-            std::map<Book*, int> cart;
             bool valid = false;
 
             while(!valid){
