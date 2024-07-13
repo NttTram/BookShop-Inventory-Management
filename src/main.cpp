@@ -282,11 +282,8 @@ int main(){
         else if(userInput == 3){ //OPTION:: BUY BOOK
 
             bool valid = false;
-
             while(!valid){
-                
                 int input = buyMenu();
-
                 try{
                     if(input == 1){ //OPTION:: ADD BOOK TO CART
                         addBookToCart(cart, bookShelf);
@@ -296,7 +293,8 @@ int main(){
                         pressToReturn();
                     }
                     else if(input == 3){ //OPTION:: CHECKOUT
-
+                        displayCart();
+                        
                     }
                     else if(input == 4){ //OPTION:: RETURN
                         valid = true;
@@ -304,9 +302,6 @@ int main(){
                     else{
                         std::cerr << "Invalid option" << std::endl;
                     }
-
-                    
-                    
                 }
                 catch(const std::invalid_argument& e)
                 {
@@ -320,7 +315,7 @@ int main(){
                     pressToContinue();
                 }
             }
-            // displayBooks(cart);
+        
 
         }
         else if(userInput == 2){ //OPTION:: SEARCH BOOK
