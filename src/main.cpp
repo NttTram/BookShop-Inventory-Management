@@ -10,13 +10,11 @@
 #include <math.h>
 #include "MenuHandler.hpp"
 
-
-//NEED CLEANING
+// IMPLEMENTATION:: Load data from .txt to Inventory
 void LoadData(Inventory* shelf){
     std::string file_path = "books.txt";
     std::ifstream data(file_path);
 
-    
     if(data){
         std::string line;
         while(getline(data, line)){
@@ -24,32 +22,10 @@ void LoadData(Inventory* shelf){
             std::vector<std::string> splitted;
             std::string word;
 
-            //Split input line into vector 
-            // for(char ch : line)
-            // {
-            //     std::string cmp;
-                
-                
-            //     cmp += ch;
-
-            //     if((cmp.compare(";") == 0) && (!word.empty())){
-            //         splitted.push_back(word);
-            //         word.clear();
-            //     }
-            //     else{
-            //         word += ch;
-            //     }
-            // }
-
-            // LOOK INTO: istringstream iss(line)
             std::istringstream iss(line);
             while(getline(iss, word, ';')){
                 splitted.push_back(word);
             }
-
-            // if(!word.empty())
-            //     splitted.push_back(word);
-
             
             int stock = std::stoi(splitted[0]);
             int barcode = std::stoi(splitted[1]);
@@ -67,6 +43,18 @@ void LoadData(Inventory* shelf){
     }
 
     
+}
+
+void pressToContinue(void){
+    clearCin();
+    std::cout << "Enter any key to continue" << std::endl;
+    clearCin();
+}
+
+void pressToReturn(void){
+    std::cout << "Enter any key to return" << std::endl;
+    std::cin.get();
+    clearCin();
 }
 
 void displayBooks( std::map<Book*, int> books){
@@ -127,7 +115,7 @@ void displayCart(std::map<Book*, int> cart){
                     setw(30) << left << "+" <<
                     setw(10) << left << "+" << std::endl;
    
-    for (const auto& [book, quantity] : cart){
+    for (const auto& [book, stock] : cart){
 
         std::cout << std::setfill(' ')
                 << "|#" << std::setw(8) << std::left << book->getBarcode() 
@@ -185,30 +173,86 @@ void searchBook(Inventory* bookShelf){
                     throw std::runtime_error("Book not found!");
                 }
                 
-                std::cout << "Enter any key to return" << std::endl;
-                std::cin.get();
-                clearCin();
+                pressToReturn();
             }
 
             valid = true;
         }
         catch(const std::invalid_argument& e)
         {
-            clearCin();
             std::cerr << "Error:: " << e.what() << '\n';
-            std::cout << "Enter any key to continue" << std::endl;
-            clearCin();
+            pressToContinue();
+
         }
         catch(const std::runtime_error& e){
-            clearCin();
+            
             std::cerr << "Error:: " << e.what() << '\n';
-            std::cout << "Enter any key to continue" << std::endl;
-            clearCin();
+            pressToContinue();
+
         }
     }
         
 
 }
+
+
+void addBookToCart(std::map<Book*, int> cart, Inventory* bookShelf){
+    bool done = false;
+    while(!done){
+        try{
+            clearConsole();
+            displayCart(cart);  
+            int barcode;
+            std::cout << "0. Done\n\n\n";
+            std::cout << "Enter book barcode: ";
+            std::cin >> barcode;
+
+            if(std::cin.fail()) throw std::invalid_argument("Invalid input: not an integer.");
+            
+            if(barcode != 0){
+                
+                bool foundBook = bookShelf->findBook(barcode);
+
+                if(foundBook){
+                    int stock = bookShelf->getStock(barcode);
+
+                    if(stock <= 0){
+                        throw std::runtime_error("Out of stock!");
+                    }else{
+                        Book* book = bookShelf->getBook(barcode);
+                        displayTitle("Found Book: " + book->getTitle());
+                        book->print();
+                        cart[book] = stock;
+                        
+                    }
+
+                }else{
+                    throw std::runtime_error("Book not found!");
+                }
+                
+                pressToReturn();
+            } else if(barcode == 0){
+                done = true;
+            }
+
+        }
+        catch(const std::invalid_argument& e)
+        {
+            
+            std::cerr << "Error:: " << e.what() << '\n';
+            pressToContinue();
+        }
+        catch(const std::runtime_error& e){
+            
+            std::cerr << "Error:: " << e.what() << '\n';
+            pressToContinue();
+        }
+
+    }
+    
+}
+
+
 
 int main(){
     // std::vector<MenuItem> data;
@@ -245,71 +289,11 @@ int main(){
 
                 try{
                     if(input == 1){ //OPTION:: ADD BOOK TO CART
-                        bool done = false;
-                        while(!done){
-                            try{
-                                clearConsole();
-                                displayCart(cart);  
-                                int barcode;
-                                std::cout << "0. Done\n\n\n";
-                                std::cout << "Enter book barcode: ";
-                                std::cin >> barcode;
-
-                                if(std::cin.fail()) throw std::invalid_argument("Invalid input: not an integer.");
-                                
-                                if(barcode != 0){
-                                    
-                                    bool foundBook = bookShelf->findBook(barcode);
-
-                                    if(foundBook){
-                                        int stock = bookShelf->getStock(barcode);
-
-                                        if(stock <= 0){
-                                            throw std::runtime_error("Out of stock!");
-                                        }else{
-                                            Book* book = bookShelf->getBook(barcode);
-                                            displayTitle("Found Book: " + book->getTitle());
-                                            book->print();
-                                            cart[book] = stock;
-                                            
-                                        }
-
-                                    }else{
-                                        throw std::runtime_error("Book not found!");
-                                    }
-                                    
-                                    std::cout << "Enter any key to continue" << std::endl;
-                                    std::cin.get();
-                                    clearCin();
-                                } else if(barcode == 0){
-                                    done = true;
-                                }
-
-                            }
-                            catch(const std::invalid_argument& e)
-                            {
-                                clearCin();
-                                std::cerr << "Error:: " << e.what() << '\n';
-                                std::cout << "Enter any key to continue" << std::endl;
-                                clearCin();
-                            }
-                            catch(const std::runtime_error& e){
-                                clearCin();
-                                std::cerr << "Error:: " << e.what() << '\n';
-                                std::cout << "Enter any key to continue" << std::endl;
-                                clearCin();
-                            }
-
-                        }
-                        
-
-
+                        addBookToCart(cart, bookShelf);
                     }
                     else if(input == 2){ //OPTION:: CHECK CART
                         displayCart(cart); 
-                        std::cout << "Enter any key to return" << std::endl;
-                        std::cin.get();
-                        clearCin();
+                        pressToReturn();
                     }
                     else if(input == 3){ //OPTION:: CHECKOUT
 
@@ -326,16 +310,14 @@ int main(){
                 }
                 catch(const std::invalid_argument& e)
                 {
-                    clearCin();
+                    // clearCin();
                     std::cerr << "Error:: " << e.what() << '\n';
-                    std::cout << "Enter any key to continue" << std::endl;
-                    clearCin();
+                    pressToContinue();
                 }
                 catch(const char* e){
-                    clearCin();
+                    // clearCin();
                     std::cerr << "Error:: " << e << '\n';
-                    std::cout << "Enter any key to continue" << std::endl;
-                    clearCin();
+                    pressToContinue();
                 }
             }
             // displayBooks(cart);
@@ -347,9 +329,7 @@ int main(){
         }
         else if(userInput == 1){ //OPTION:: VIEW ALL BOOKS
             displayBooks(books);
-            std::cout << "Enter any key to return" << std::endl;
-            std::cin.get();
-            clearCin();
+            pressToReturn();
         
         } else{
             std::cerr << "Invalid option" << std::endl;
