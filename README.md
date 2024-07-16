@@ -2,8 +2,16 @@
 
 
 ## Table of contents
--[Introduction](#Introduction)
-
+- [Introduction](#introduction)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [API References](#api-references)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 
 ## Introduction
@@ -13,7 +21,9 @@ An inventory system for a bookshop management system using OOP while learning ot
 
 ## Features
 Feature 1:
+
 Feature 2:
+
 Feature 3:
 
 ## Requirements
@@ -34,7 +44,7 @@ How to run and use the program
 
 
 
-## Configurationn
+## Configuration
 ```
 {
   "database": {
@@ -47,7 +57,7 @@ How to run and use the program
 }
 ```
 
-## API Referencce
+## API References
 Detail the REST API endpoints
 ex: 
 - GET/api/hello
@@ -89,5 +99,6 @@ This project is licensed under the MIT License - see the [LICENSE] file for deta
 
 ## Contact
 Email: ntt.tram.tran@gmail.com
+
 GitHub: NttTram
 
