@@ -1,0 +1,3 @@
+/mnt/c/Users/anime/Documents/GitHub/BookShop-Inventory-Management/src/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/anime/Documents/GitHub/BookShop-Inventory-Management/src/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/anime/Documents/GitHub/BookShop-Inventory-Management/src/build/CMakeFiles/MySQLExample.dir

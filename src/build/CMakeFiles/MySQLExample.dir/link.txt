@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/MySQLExample.dir/sql.cpp.o  -o MySQLExample   -L/usr/lib/x86_64-linux-gnu/libmysqlclient.so  -Wl,-rpath,/usr/lib/x86_64-linux-gnu/libmysqlclient.so /usr/lib/x86_64-linux-gnu/libmysqlclient.so 
