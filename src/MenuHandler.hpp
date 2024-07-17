@@ -75,6 +75,7 @@ void displayMenuItem(std::vector<MenuItem>& data){
 
 // IMPLEMENTATION:: Prompt user for input with validation 
 void userPrompt(bool& valid, int& userInput, int dataSize){
+    try{
         std::cout << std::setfill('=') << std::setw(SCREEN_SIZE) << "" << std::endl;
         std::cout << "Please enter the number of your choice: ";
         std::cin >> userInput;
@@ -85,11 +86,19 @@ void userPrompt(bool& valid, int& userInput, int dataSize){
 
         // Validation for correct input
         if(cin.fail() || lowerBoundFail || upperBoundFail){
-            clearCin();
-            clearConsole();
+            throw std::invalid_argument("Invalid input");
         }else{
             valid = true;
         }
+
+    }
+    catch(const std::invalid_argument& e)
+    {
+        clearCin();
+        std::cerr << "Error:: " << e.what() << '\n';
+        std::cout << "Enter any key to continue" << std::endl;
+        clearCin();
+    }
 }
 
 
@@ -156,7 +165,7 @@ int mainMenu(void){
     -->     Enter quantity to buy:
 */
 
-void buyMenu(void){
+int buyMenu(void){
       // search book
             // Add to cart
             // show total cost
@@ -173,10 +182,14 @@ void buyMenu(void){
 
     std::vector<MenuItem> menuList = {
         {1, "Add Book to Cart"},
-        {2, "Checkout"},
+        {2, "Check Cart"},
+        {3, "Checkout"},
         {3, "Return"}
     };
-    displayMenu("Buy Books", menuList);
+
+
+
+    return displayMenu("Buy Book(s)", menuList);
         
 }
 
