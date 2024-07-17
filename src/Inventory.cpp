@@ -1,5 +1,6 @@
 #include "Inventory.hpp"
 
+
 Inventory::Inventory(){
     totalCost = 0;
 }
@@ -19,14 +20,17 @@ void Inventory::removeBook(int barcode){
 }
 
 Book* Inventory::getBook(int barcode){
+
+    Book* emptyBook = new Book();
+
     for (auto& book : books){
         if(book.first->getBarcode() == barcode){
-            cout<<"--- Found book with barcode: "<<barcode<<" ---"<<endl;
+            // std::cout<<"--- Found book with barcode: "<<barcode<<" ---"<<std::endl;
             return book.first;
         }
     }
-    cout<<"--- Book not found ---"<<endl;
-
+    // std::cout<<"--- Book not found ---"<<std::endl;
+    return emptyBook;
 }
 
 bool Inventory::findBook(int barcode){
@@ -45,12 +49,16 @@ int Inventory::getStock(int barcode){
 void Inventory::updateStock(int barcode, int addStock){
     books[getBook(barcode)] += addStock;
     totalCost += addStock * getBook(barcode)->price;
-    cout<<"---Updated stock---"<<endl;
+    std::cout<<"---Updated stock---"<<std::endl;
     print();
 }
 
 void Inventory::getTotalCost(){
-    cout<<"Total Cost: $"<<totalCost<<endl;
+    std::cout<<"Total Cost: $"<<totalCost<<std::endl;
+}
+
+std::map<Book*, int> Inventory::getAllBooks(){
+    return books;
 }
 
 void Inventory::print(){
@@ -61,6 +69,14 @@ void Inventory::print(){
         std::cout<<"Title: "<<value.first->getTitle()<< std::endl;
         std::cout<<"Available Stock: "<<value.second<<std::endl;
     }
-    cout<<endl;
-    cout<<"TotalCost: $"<<totalCost<<endl;
+    std::cout<<std::endl;
+    std::cout<<"TotalCost: $"<<totalCost<<std::endl;
 }
+
+void Inventory::clearInventory(){
+    // for (const auto& book : books){
+    //     book.first->~Book(); 
+    // }
+    books.clear();
+}
+

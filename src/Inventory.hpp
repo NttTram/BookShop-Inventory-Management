@@ -5,18 +5,19 @@
 #include <map>
 #include "Book.hpp"
 
-using namespace std;
+
+
 class Inventory;
 class Inventory{
 
-    map<Book *, int> books;
+    std::map<Book *, int> books;
     double totalCost;
 
     public:
     
     Inventory();
     ~Inventory();
-    
+    std::map<Book*, int> getAllBooks();
     void addBook(Book* book, int stock);
     void removeBook(int barcode);
     Book* getBook(int barcode);
@@ -26,6 +27,7 @@ class Inventory{
     void getTotalCost();
     
     void print();
+    void clearInventory();
 
 
 };

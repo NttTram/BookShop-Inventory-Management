@@ -1,13 +1,15 @@
-appname := BookStore
+.default: all
 
-CXX = g++
-CXX_FLAGS= -std=g++11 -Wall -g -Werror
+all: main
 
-srcfile := $(shell find . -maxdepth 1 -name "*.cpp")
-objects := $(pathsubst %.cpp, %.o $(srcfiles))
+clean:
+	rm -f main *.o
 
-all: $(appname)
+reload: clean all
 
-$(appname): $(objects) 
-	$(CXX) $(CXX_FLAGS) -o $(appname) $(objects)
 
+main: Book.o  Inventory.o main.o
+	g++ -Wall -Werror -std=c++17 -g -O -o $@ $^ 
+
+%.o: %.cpp 
+	g++ -Wall -Werror -std=c++17 -g -O -c $^

@@ -1,6 +1,12 @@
 #include "Book.hpp"
-
-Book::Book(int barcode, string title, string author, int year, double price){
+Book::Book(){
+    barcode = 0;
+    title = "N/A";
+    author = "N/A";
+    year = 0;
+    price = 0.00;
+}
+Book::Book(int barcode, std::string title, std::string author, int year, double price){
     this->barcode = barcode;
     this->title = title;
     this->author = author;
@@ -24,10 +30,10 @@ int Book::getYear(){
 }
 
 void Book::print(){
-    cout<<"--------------------"<<endl;
-    cout<<"Barcode: "<<barcode<<endl;
-    cout<<"Title: "<<title<<endl;
-    cout<<"Author: "<<author<<endl;
-    cout<<"Year: "<<year<<endl;
-    cout<<"Price: $"<<price<<endl;
+
+    std::cout << "Barcode: #" << barcode << std::endl;
+    std::cout << "Title: " << title << std::endl;
+    std::cout << "Author: " << author << std::endl;
+    std::cout << "Year: " << year << std::endl;
+    std::cout << "Price: $" << price << std::endl;
 }

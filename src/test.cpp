@@ -99,7 +99,6 @@ void WriteData(string text){
 
         fileOut << text;
         
-
         //close file
         fileOut.close();
     }else{
